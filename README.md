@@ -13,4 +13,4 @@ Includes coloring for
 * Instance names as separate entites from numbers
 * Numbers including floats
 
-![Example hilights with Dark Modern theme](https://github.com/a18rhodes/spef-language/blob/main/example.png?raw=true "Example")
+![Example hilights with Dark Modern theme](resources/example.png "Example")

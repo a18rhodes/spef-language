@@ -1,10 +1,24 @@
  {
      "name": "spef-language",
      "version": "0.0.1",
+     "displayName": "spef-language",
+     "description": "Basic SPEF (Standard Parasitic Exchange Format syntax highliting.",
+     "categories": ["Programming Languages"],
+     "keywords": ["SPEF", "Standard Parasitic Exchange Format", "IC", "Verilog", "Digital design", "EDA"],
      "engines": {
          "vscode": ">=0.9.0-pre.1"
      },
+     "icon": "resources/spef-language.png",
+     "license": "SEE LICENSE IN GIT REPO",
      "publisher": "Austin Rhodes",
+     "author": {
+        "name": "Austin Rhodes"
+     },
+     "repository": {
+        "type": "git",
+        "url": "https://github.com/a18rhodes/spef-language"
+     },
+     "homepage": "https://github.com/a18rhodes/spef-language/blob/main/README.md",
      "contributes": {
          "languages": [{
              "id": "SPEF",
