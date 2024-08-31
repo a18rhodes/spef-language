@@ -1,0 +1,129 @@
+{
+  "scopeName": "source.spef",
+  "name": "SPEF",
+  "patterns": [
+    {
+      "include": "#header"
+    },
+    {
+      "include": "#body"
+    }
+  ],
+  "repository": {
+    "header": {
+      "patterns": [
+        {
+          "name": "meta.spef.desingflow",
+          "match": "(^\\*DESIGN_FLOW)\\s?(\".+\")+",
+          "captures": {
+            "1": {
+              "name": "keyword.control.spef.heading"
+            },
+            "2": {
+              "name": "constant.language.spef.designflow"
+            }
+          }
+        },
+        {
+          "name": "keyword.control.spef.heading",
+          "match": "^\\*(VERSION|DESIGN|DATE|VENDOR|PROGRAM|DIVIDER|BUS_DELIMITER|DELIMITER|SPEF|T_UNIT|C_UNIT|R_UNIT|L_UNIT)"
+        },
+        {
+          "name": "keyword.other.spef.units",
+          "match": "(NS|PS|FF|PF|OHM|KOHM|HENRY|MH|UH)"
+        },
+        {
+          "name": "meta.spef.pwrgnd",
+          "match": "(^\\*(POWER|GND)_NETS)(\\s)(.*)",
+          "captures": {
+            "1": {
+              "name": "keyword.control.spef.pwrgnd"
+            },
+            "3": {
+              "name": "constant.other.spef.rails"
+            }
+          }
+        },
+        {
+          "name": "string.quoted.double",
+          "match": "\"[^\"]*\""
+        }
+      ]
+    },
+    "body": {
+      "patterns": [
+        {
+          "name": "comment.multiline",
+          "begin": "/\\*",
+          "end": "\\*/"
+        },
+        {
+          "name": "comment.line",
+          "match": "//.*$"
+        },
+        {
+          "name": "entity.name.type.enummember.spef.portdir",
+          "match": "\\b[IO]\\b"
+        },
+        {
+          "name": "meta.spef.sub",
+          "match": "(:)(\\w+)",
+          "captures": {
+            "1": {
+              "name": "punctuation.separator"
+            },
+            "2": {
+              "name": "constant.language.spef.sub"
+            }
+          }
+        },
+        {
+          "name": "meta.spef.bus",
+          "match": "(\\<|\\[|\\()([\\d+:]+)(\\]|\\)|\\>)",
+          "captures": {
+            "1": {
+              "name": "punctuation.bracket.spef.bus.start"
+            },
+            "2": {
+              "name": "number.spef.bus.bit"
+            },
+            "3": {
+              "name": "punctuation.bracket.spef.bus.end"
+            }
+          }
+        },
+        {
+          "name": "other.bus.delim",
+          "match": "[\\<\\[\\(\\]\\)\\>]"
+        },
+        {
+          "name": "entity.name.variable.spef.instance",
+          "match": "^\\d+"
+        },
+        {
+          "name": "entity.name.function.macro.spef.mappedkey",
+          "match": "\\s?\\*\\d"
+        },
+        {
+          "name": "number",
+          "match": "\\b\\d+\\.?\\d?\\b"
+        },
+        {
+          "name": "string.interpolated.spef.driveload",
+          "match": "\\s\\*[DL]+",
+          "style": {"foreground": "#9CDC00"}
+        },
+        {
+          "name": "entity.name.namespace.spef.sections",
+          "match": "^\\*(\\w+)"
+        },
+        {
+          "name": "variable.parameter.item",
+          "match": "\\w+"
+        }
+      ]
+    }
+  },
+  "fileTypes": ["spef"],
+  "uuid": "a12b34cd-56ef-78gh-90ij-klmno1234567"
+}

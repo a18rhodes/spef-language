@@ -1,0 +1,68 @@
+*SPEF "IEEE 1481-1999"
+*DESIGN "test"
+*DATE "March 6, 1996"
+*VENDOR "Abiders, Inc."
+*VERSION "V2000.09"
+*DESIGN_FLOW "PIN_CAP NONE" "NAME_SCOPE LOCAL"
+*DIVIDER .
+*DELIMITER :
+*BUS_DELIMITER []
+*T_UNIT 1.00000 NS
+*C_UNIT 1.00000 FF
+*R_UNIT 1.00000 OHM
+*L_UNIT 1.00000 HENRY
+
+*POWER_NETS VDD
+*GND_NETS VSS
+
+/*
+This is a multiline comment.
+See, all the lines are comments.
+*/
+
+// Here is a single line comment
+
+*NAME_MAP
+*1 XTopK1.In[1]
+*2 XTopK1.In[0]
+*3 XTopK1.Out
+*4 net1
+*5 XTopK1.X1.In
+*6 XTopK1.X1.Out
+*7 XTopK1.X2.In
+*8 XTopK1.X2.Out
+
+*PORTS
+*1 I
+*2 I
+*3 O
+*5 I
+*6 O
+*7 I
+*8 O
+
+*D_NET *3 1
+
+*CONN
+*P *3
+*I *5:Out O *L 0 *D InvX1
+*I *6:In I *L 0
+*N *3:1 1 1
+*N *3:2 1 2
+*N *3:3 2 1
+*N *3:4 2 2
+
+*CAP
+1 *3:1 0.25
+2 *3:2 0.25
+3 *3:3 0.25
+4 *3:4 0.25
+
+*RES
+1 *3:1 *6:In 0.1
+2 *3:4 *5:Out 0.1
+3 *3:1 *3:2 1.4916
+4 *3:2 *3:3 234.145
+5 *3:3 *3:4 1.8901
+
+*END
