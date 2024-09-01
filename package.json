@@ -2,7 +2,7 @@
      "name": "spef-language",
      "version": "0.0.1",
      "displayName": "spef-language",
-     "description": "Basic SPEF (Standard Parasitic Exchange Format syntax highliting.",
+     "description": "Basic SPEF (Standard Parasitic Exchange Format) syntax highliting.",
      "categories": ["Programming Languages"],
      "keywords": ["SPEF", "Standard Parasitic Exchange Format", "IC", "Verilog", "Digital design", "EDA"],
      "engines": {
