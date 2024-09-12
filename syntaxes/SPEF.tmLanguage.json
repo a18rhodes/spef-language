@@ -102,7 +102,7 @@
         },
         {
           "name": "entity.name.function.macro.spef.mappedkey",
-          "match": "\\s?\\*\\d"
+          "match": "\\s?\\*\\d+"
         },
         {
           "name": "number",
@@ -115,7 +115,7 @@
         },
         {
           "name": "entity.name.namespace.spef.sections",
-          "match": "^\\*(\\w+)"
+          "match": "^\\*[A-Z]+$"
         },
         {
           "name": "variable.parameter.item",
