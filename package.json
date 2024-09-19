@@ -1,6 +1,6 @@
 {
      "name": "spef-language",
-     "version": "0.0.4",
+     "version": "0.0.5",
      "displayName": "spef-language",
      "description": "Basic SPEF (Standard Parasitic Exchange Format) syntax highliting.",
      "categories": [
