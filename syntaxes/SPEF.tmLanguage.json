@@ -62,10 +62,6 @@
           "match": "//.*$"
         },
         {
-          "name": "entity.name.type.enummember.spef.portdir",
-          "match": "\\b[IO]\\b"
-        },
-        {
           "name": "meta.spef.sub",
           "match": "(:)(\\w+)",
           "captures": {
@@ -102,7 +98,7 @@
         },
         {
           "name": "entity.name.function.macro.spef.mappedkey",
-          "match": "\\s?\\*\\d+"
+          "match": "\\*\\d+"
         },
         {
           "name": "number",
@@ -110,16 +106,23 @@
         },
         {
           "name": "string.interpolated.spef.driveload",
-          "match": "\\s\\*[DL]+",
-          "style": {"foreground": "#9CDC00"}
+          "match": "\\s\\*[DL]+"
         },
         {
           "name": "entity.name.namespace.spef.sections",
-          "match": "^\\*[A-Z]+$"
+          "match": "^\\*(NAME_MAP|PORTS|D_NET|CONN|RES|CAP|IND|END)"
+        },
+        {
+          "name": "support.type.spef.connlabel",
+          "match": "^\\*(I|P|N)"
         },
         {
           "name": "variable.parameter.item",
           "match": "\\w+"
+        },
+        {
+          "name": "entity.name.type.enummember.spef.portdir",
+          "match": "\\b[IO][$\\s]"
         }
       ]
     }
