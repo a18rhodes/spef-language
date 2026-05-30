@@ -13,39 +13,28 @@
     "header": {
       "patterns": [
         {
-          "name": "meta.spef.desingflow",
-          "match": "(^\\*DESIGN_FLOW)\\s?(\".+\")+",
-          "captures": {
-            "1": {
-              "name": "keyword.control.spef.heading"
-            },
-            "2": {
-              "name": "constant.language.spef.designflow"
-            }
-          }
-        },
-        {
+          "comment": "Header keywords. DESIGN_FLOW must precede DESIGN, and BUS_DELIMITER precede DELIMITER; the trailing \\b prevents *DESIGN matching *DESIGN_FLOW.",
           "name": "keyword.control.spef.heading",
-          "match": "^\\*(VERSION|DESIGN|DATE|VENDOR|PROGRAM|DIVIDER|BUS_DELIMITER|DELIMITER|SPEF|T_UNIT|C_UNIT|R_UNIT|L_UNIT)"
+          "match": "^\\*(VERSION|DESIGN_FLOW|DESIGN|DATE|VENDOR|PROGRAM|DIVIDER|BUS_DELIMITER|DELIMITER|SPEF|T_UNIT|C_UNIT|R_UNIT|L_UNIT)\\b"
         },
         {
           "name": "keyword.other.spef.units",
-          "match": "(NS|PS|FF|PF|OHM|KOHM|HENRY|MH|UH)"
+          "match": "\\b(NS|PS|FF|PF|OHM|KOHM|HENRY|MH|UH)\\b"
         },
         {
-          "name": "meta.spef.pwrgnd",
-          "match": "(^\\*(POWER|GND)_NETS)(\\s)(.*)",
+          "comment": "Power/ground net declarations; capture group 3 colors the rail names.",
+          "match": "(^\\*(POWER|GND)_NETS)\\s+(.*)$",
           "captures": {
             "1": {
               "name": "keyword.control.spef.pwrgnd"
             },
             "3": {
-              "name": "constant.other.spef.rails"
+              "name": "entity.name.spef.rail"
             }
           }
         },
         {
-          "name": "string.quoted.double",
+          "name": "string.quoted.double.spef",
           "match": "\"[^\"]*\""
         }
       ]
@@ -53,80 +42,86 @@
     "body": {
       "patterns": [
         {
-          "name": "comment.multiline",
+          "name": "comment.block.spef",
           "begin": "/\\*",
           "end": "\\*/"
         },
         {
-          "name": "comment.line",
+          "name": "comment.line.double-slash.spef",
           "match": "//.*$"
         },
         {
-          "name": "meta.spef.sub",
+          "comment": "Subnode reference, e.g. the :1 in *3:1",
           "match": "(:)(\\w+)",
           "captures": {
             "1": {
-              "name": "punctuation.separator"
+              "name": "punctuation.separator.spef"
             },
             "2": {
-              "name": "constant.language.spef.sub"
+              "name": "constant.other.spef.subnode"
             }
           }
         },
         {
-          "name": "meta.spef.bus",
-          "match": "(\\<|\\[|\\()([\\d+:]+)(\\]|\\)|\\>)",
+          "comment": "Bus bit/range, e.g. [1], <0:7>, (3)",
+          "match": "(<|\\[|\\()([\\d:]+)(\\]|\\)|>)",
           "captures": {
             "1": {
-              "name": "punctuation.bracket.spef.bus.start"
+              "name": "punctuation.definition.bracket.spef"
             },
             "2": {
-              "name": "number.spef.bus.bit"
+              "name": "constant.numeric.spef.bus"
             },
             "3": {
-              "name": "punctuation.bracket.spef.bus.end"
+              "name": "punctuation.definition.bracket.spef"
             }
           }
         },
         {
-          "name": "other.bus.delim",
-          "match": "[\\<\\[\\(\\]\\)\\>]"
+          "name": "punctuation.definition.bracket.spef",
+          "match": "[<\\[\\(\\]\\)>]"
         },
         {
-          "name": "entity.name.variable.spef.instance",
+          "comment": "Net-segment index at start of a CAP/RES/INDUC row",
+          "name": "constant.numeric.spef.index",
           "match": "^\\d+"
         },
         {
-          "name": "entity.name.function.macro.spef.mappedkey",
+          "comment": "Name-map reference, e.g. *1, *42",
+          "name": "entity.name.function.spef.mappedkey",
           "match": "\\*\\d+"
         },
         {
-          "name": "number",
-          "match": "\\b\\d+\\.?\\d?\\b"
+          "name": "constant.numeric.spef",
+          "match": "\\b\\d+(\\.\\d+)?\\b"
         },
         {
-          "name": "string.interpolated.spef.driveload",
-          "match": "\\s\\*[DL]+"
+          "comment": "Connection attributes: *D driving cell, *L load cap. Lookbehind keeps the leading space out of the token.",
+          "name": "keyword.other.spef.attribute",
+          "match": "(?<=\\s)\\*[DL]\\b"
         },
         {
-          "name": "entity.name.namespace.spef.sections",
-          "match": "^\\*(NAME_MAP|PORTS|D_NET|CONN|RES|CAP|IND|END)"
+          "comment": "Section headers. INDUC is the IEEE 1481 inductance section; R_NET is the reduced-net section.",
+          "name": "keyword.control.spef.section",
+          "match": "^\\*(NAME_MAP|PORTS|D_NET|R_NET|CONN|RES|CAP|INDUC|END)\\b"
         },
         {
-          "name": "support.type.spef.connlabel",
-          "match": "^\\*(I|P|N)"
+          "comment": "Connection labels: *P port, *I instance pin, *N internal node. \\b keeps *INDUC/*NAME_MAP from matching.",
+          "name": "keyword.other.spef.connection",
+          "match": "^\\*(I|P|N)\\b"
         },
         {
-          "name": "variable.parameter.item",
+          "comment": "Port/pin direction: I input, O output, B bidirectional. Lookbehind excludes the I/P/N of a *I/*P/*N label.",
+          "name": "keyword.other.spef.direction",
+          "match": "(?<!\\*)\\b[IOB]\\b"
+        },
+        {
+          "comment": "Catch-all for instance/net names. MUST remain the last pattern, or any rule placed after it becomes unreachable.",
+          "name": "variable.other.spef",
           "match": "\\w+"
-        },
-        {
-          "name": "entity.name.type.enummember.spef.portdir",
-          "match": "\\b[IO][$\\s]"
         }
       ]
     }
   },
-  "fileTypes": ["spef"],
-  "uuid": "a12b34cd-56ef-78gh-90ij-klmno1234567"
+  "fileTypes": ["spef"]
 }

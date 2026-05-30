@@ -1,0 +1,10 @@
+# Keep the published .vsix small — exclude anything not needed at runtime.
+.git/**
+.github/**
+.gitignore
+.vscodeignore
+**/*.vsix
+
+# Repo docs / dev-only assets. The icon (resources/spef-language.png) is kept.
+resources/example.png
+snippets/**

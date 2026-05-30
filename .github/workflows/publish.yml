@@ -1,0 +1,45 @@
+name: Publish Extension
+
+# Publishes to BOTH the VS Code Marketplace and the Open VSX Registry.
+# Open VSX is what Cursor, Windsurf, VSCodium, and Gitpod install from.
+#
+# Trigger: push a version tag, e.g.
+#   git tag v0.0.6 && git push origin v0.0.6
+# Or run it manually from the Actions tab (workflow_dispatch).
+#
+# Required repository secrets (Settings -> Secrets and variables -> Actions):
+#   VSCE_PAT  - Azure DevOps Personal Access Token for the VS Code Marketplace
+#   OVSX_PAT  - Access token from https://open-vsx.org
+# Running on a public repo uses free, unlimited standard runners.
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install packaging tools
+        run: npm install -g @vscode/vsce ovsx
+
+      - name: Package extension
+        run: vsce package -o spef-language.vsix
+
+      - name: Publish to VS Code Marketplace
+        run: vsce publish --packagePath spef-language.vsix --pat "$VSCE_PAT"
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+
+      - name: Publish to Open VSX (Cursor, Windsurf, VSCodium, Gitpod)
+        run: ovsx publish spef-language.vsix --pat "$OVSX_PAT"
+        env:
+          OVSX_PAT: ${{ secrets.OVSX_PAT }}
