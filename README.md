@@ -1,6 +1,6 @@
-# Basic SPEF syntax highligting
+# Basic SPEF syntax highlighting
 
-Very basic SPEF (Standard Parasitic Exchange Format IEEE 1481-2009) syntax highligting **only** (i.e., not full language support) for detailed nets (D_NET). May incidentially support reduced nets (R_NET) since the syntax is fairly similar.
+Very basic SPEF (Standard Parasitic Exchange Format IEEE 1481-2009) syntax highlighting **only** (i.e., not full language support) for detailed nets (D_NET). May incidentally support reduced nets (R_NET) since the syntax is fairly similar.
 
 Includes coloring for
 * Headers (e.g., \*SPEF, \*DESIGN, etc.)
@@ -13,4 +13,4 @@ Includes coloring for
 * Instance names as separate entites from numbers
 * Numbers including floats
 
-![Example hilights with Dark Modern theme](resources/example.png "Example")
+![Example highlights with Dark Modern theme](resources/example.png "Example")

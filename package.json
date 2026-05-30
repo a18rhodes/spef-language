@@ -1,8 +1,8 @@
 {
      "name": "spef-language",
-     "version": "0.0.5",
-     "displayName": "spef-language",
-     "description": "Basic SPEF (Standard Parasitic Exchange Format) syntax highliting.",
+     "version": "0.0.6",
+     "displayName": "SPEF Language",
+     "description": "Basic SPEF (Standard Parasitic Exchange Format) syntax highlighting.",
      "categories": [
           "Programming Languages"
      ],
@@ -15,10 +15,10 @@
           "EDA"
      ],
      "engines": {
-          "vscode": ">=0.9.0-pre.1"
+          "vscode": "^1.60.0"
      },
      "icon": "resources/spef-language.png",
-     "license": "SEE LICENSE IN GIT REPO",
+     "license": "GPL-3.0-or-later",
      "publisher": "arhodes",
      "author": {
           "name": "Austin Rhodes"
